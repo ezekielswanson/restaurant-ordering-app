@@ -140,7 +140,7 @@ main {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 22px;
+  
 }
 
 .menu-items__order-summary .menu-items__order-summary--item-row .menu-items__order-summary--item-row__name {
@@ -195,4 +195,22 @@ button, input[type="submit"], input[type="reset"] {
     width: 504px;
     border: solid 1px #393333;
     margin-top: 9px;
+}
+
+
+.menu-items__order-summary .menu-items__order-summary--btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 175px;
+    margin-top: 53px;
+    border-radius: 3px;
+    background-color: #16DB99;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+    color: #fff;
+    font-family: Verdana;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 150% */
 }

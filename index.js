@@ -8,8 +8,6 @@ function  getMenuItems() {
     let menuDisplay = '';
 
     menuArray.forEach(function(item) {
-
-
         menuDisplay += `
             <div class="menu-items__row"> 
                 <div class="menu-items__row-left">
@@ -26,18 +24,26 @@ function  getMenuItems() {
                     </div>
                 </div>
             </div>
-           `
+            `
+
+        //Have to loop through again set new var and +=
+        //Logic to check if user added to order
+
+
     })
 
     return menuDisplay 
-
 }
 
 
-//Displaying Menu Items
+//Displaying Menu Items 
+//Displaying Summary Total
 function renderMenuItems() {
     const menuContainer = document.querySelector('.menu-items');
     menuContainer.innerHTML = getMenuItems();
+
+    const summaryContainer = document.querySelector('.menu-items__order-summary');
+    summaryContainer.innerHTML = getMenuItems();
 
 }
 
@@ -50,15 +56,13 @@ renderMenuItems();
 
 //put click event on btn itself
 document.addEventListener('click', function(e){
-    //we need to pass t/ btns data att. somewhere
+  //we need to pass t/ btns data att. somewhere
   //const matchedItem = getMatchingItem(e.target.dataset.foodItem);
 
   if (e.target.dataset.foodItem) {
     getMatchingItem(e.target.dataset.foodItem);
     showOrderTotal(e.target.dataset.foodItem);
   }
-
-
 
 })
 
