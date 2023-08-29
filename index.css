@@ -52,8 +52,9 @@ main {
 }
 
 .menu-items {
-    padding: 60px 46px 417px;
+    padding: 60px 46px 0px;
 }
+
 
 .menu-items .menu-items__row {
     display: flex;
@@ -110,8 +111,88 @@ main {
 }
 
 
+/*** ORDER TOTATL SECTION ***/
+
+.menu-items__order-summary {
+    padding: 45px 46px 53px;
+    font-family: Smythe;
+    font-style: normal;
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.menu-items__order-summary h3 {
+    text-align: center;
+    color: #000;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 16.8px;
+    margin-bottom: 64px;
+}
 
 
 
+.menu-items__order-summary .menu-items__order-summary--item-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.menu-items__order-summary .menu-items__order-summary--item-row .menu-items__order-summary--item-row__name {
+    display: flex;
+    flex-direction: row;
+    gap: 13px;
+    align-items: center;
+}
+
+.menu-items__order-summary .menu-items__order-summary--item-row .menu-items__order-summary--item-row__name p {
+    color: #000;
+    font-family: Smythe;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16.8px; /* 60% */
+}
+
+/*Removing default button style */
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.menu-items__order-summary .menu-items__order-summary--item-row .menu-items__order-summary--item-row__name button {
+    color: #BBB;
+    font-family: Verdana;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 24px; /* 200% */
+}
 
 
+
+.menu-items__order-summary .menu-items__order-summary--item-row .menu-items__order-summary--item-row__price {
+    color: #000;
+    text-align: right;
+    font-family: Smythe;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 120% */
+}
+
+
+.menu-items__order-summary .menu-items__order-summary-hz-line {
+    width: 504px;
+    border: solid 1px #393333;
+    margin-top: 9px;
+}
