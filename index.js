@@ -36,14 +36,21 @@ function  getMenuItems() {
 }
 
 
+
+
+
+
+
+
+
 //Displaying Menu Items 
 //Displaying Summary Total
 function renderMenuItems() {
     const menuContainer = document.querySelector('.menu-items');
     menuContainer.innerHTML = getMenuItems();
 
-    const summaryContainer = document.querySelector('.menu-items__order-summary');
-    summaryContainer.innerHTML = getMenuItems();
+    //const summaryContainer = document.querySelector('.menu-items__order-summary');
+    //summaryContainer.innerHTML = getMenuItems();
 
 }
 
@@ -61,7 +68,7 @@ document.addEventListener('click', function(e){
 
   if (e.target.dataset.foodItem) {
     getMatchingItem(e.target.dataset.foodItem);
-    showOrderTotal(e.target.dataset.foodItem);
+    //showOrderTotal(e.target.dataset.foodItem);
   }
 
 })
@@ -85,6 +92,13 @@ function getMatchingItem(foodId) {
 
 
 
+
+
+/* 
+When user clicks on item, display summary totatl.
+
+if(user clicks once display check out)
+*/
 
 
 //have matching food if pass into another function that display the order total
