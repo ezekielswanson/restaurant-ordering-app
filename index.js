@@ -60,7 +60,6 @@ renderMenuItems();
 
 
 //need to put data attributes on btns to access the specific btns
-
 //put click event on btn itself
 document.addEventListener('click', function(e){
   //we need to pass t/ btns data att. somewhere
@@ -68,11 +67,27 @@ document.addEventListener('click', function(e){
 
   if (e.target.dataset.foodItem) {
     getMatchingItem(e.target.dataset.foodItem);
+    const foodId = e.target.dataset.foodItem
+
+    const clickedFoodItem = getMatchingItem(foodId)[0];
+    
+    const orderTotal = [];
+    orderTotal.push(clickedFoodItem);
+
+    console.log(orderTotal)
+
+
+
+
+
     //showOrderTotal(e.target.dataset.foodItem);
   }
 
 })
 
+
+//On click push cliked items into an empty array
+//then render those items 
 
 
 
