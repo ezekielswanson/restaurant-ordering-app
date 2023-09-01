@@ -36,9 +36,9 @@ function  getMenuItems() {
 }
 
 
-
-
-
+function getOrderSummary() {
+    let orderSummaryDisplay = 
+}
 
 
 
@@ -57,7 +57,7 @@ function renderMenuItems() {
 renderMenuItems();
 
 
-
+const orderTotal = [];
 
 //need to put data attributes on btns to access the specific btns
 //put click event on btn itself
@@ -67,20 +67,14 @@ document.addEventListener('click', function(e){
 
   if (e.target.dataset.foodItem) {
     getMatchingItem(e.target.dataset.foodItem);
-    const foodId = e.target.dataset.foodItem
 
-    const clickedFoodItem = getMatchingItem(foodId)[0];
-    
-    const orderTotal = [];
+    const foodId = e.target.dataset.foodItem
+    const clickedFoodItem = getMatchingItem(foodId);
+
     orderTotal.push(clickedFoodItem);
 
-    console.log(orderTotal)
-
-
-
-
-
-    //showOrderTotal(e.target.dataset.foodItem);
+    //console.log(orderTotal)
+    //do something with this info 
   }
 
 })
@@ -94,6 +88,7 @@ document.addEventListener('click', function(e){
 
 
 //Get matching id of the the food item
+//Returns matching objeect id from food item
 function getMatchingItem(foodId) {
     
     const foodIdNumber = parseInt(foodId, 10)
