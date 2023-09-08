@@ -36,25 +36,61 @@ function  getMenuItems() {
 }
 
 
-function getOrderSummary() {
-    let orderSummaryDisplay = 
+
+//Get Order Summary Items
+function getSummaryItems() {
+    let summaryDisplay = '';
+
+    orderTotal.forEach(order =>{
+        summaryDisplay += `
+        <div class="menu-items__order-summary--item-row__name">
+            <p>${order.name}</p>
+            <button>Remove</button>
+        </div>
+        <div class="menu-items__order-summary--item-row__price">${order.price}</div>
+        `
+
+    })
+
+    return summaryDisplay;
 }
 
 
 
 
-//Displaying Menu Items 
-//Displaying Summary Total
+
+//Display Menu Items 
+
 function renderMenuItems() {
     const menuContainer = document.querySelector('.menu-items');
     menuContainer.innerHTML = getMenuItems();
 
     //const summaryContainer = document.querySelector('.menu-items__order-summary');
     //summaryContainer.innerHTML = getMenuItems();
-
 }
 
 renderMenuItems();
+
+
+
+
+// Display Order Summary Items
+function rednerOrderSummaryItems() {
+    const orderSummaryItemsContainer = document.querySelector('.menu-items__order-summary--item-row');
+    orderSummaryItemsContainer,innerHTML = getSummaryItems();
+}
+
+getSummaryItems();
+
+
+
+
+//Display Summary Items
+/*
+function getOrderSummary() {
+    let orderSummaryDisplay = 
+}
+*/
 
 
 const orderTotal = [];
