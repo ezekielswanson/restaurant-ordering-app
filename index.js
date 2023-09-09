@@ -36,6 +36,67 @@ function  getMenuItems() {
 }
 
 
+//Display Menu Items 
+
+function renderMenuItems() {
+    const menuContainer = document.querySelector('.menu-items');
+    menuContainer.innerHTML = getMenuItems();
+
+    //const summaryContainer = document.querySelector('.menu-items__order-summary');
+    //summaryContainer.innerHTML = getMenuItems();
+}
+
+renderMenuItems();
+
+
+
+
+
+
+
+const orderTotal = [];
+
+document.addEventListener('click', function(e){
+  //const matchedItem = getMatchingItem(e.target.dataset.foodItem);
+
+  if (e.target.dataset.foodItem) {
+    getMatchingItem(e.target.dataset.foodItem);
+
+    const foodId = e.target.dataset.foodItem
+    const clickedFoodItem = getMatchingItem(foodId);
+
+    orderTotal.push(clickedFoodItem);
+
+    rednerOrderSummaryItems()
+    
+    const orderSummaryPrice = document.querySelector('.menu-items__order-summary--item-row__price');
+    orderSummaryPrice.innerHTML = `
+    <span>${totalPrice}</span>
+    `
+  }
+
+})
+
+
+
+
+
+
+
+//Get matching id of the the food item
+//Returns matching objeect id from food item
+function getMatchingItem(foodId) {
+    
+    const foodIdNumber = parseInt(foodId, 10)
+    //filter function
+    const trgtFoodItem = menuArray.find(function(item){
+        return item.id === foodIdNumber
+    })
+    return trgtFoodItem;
+
+}
+
+
 
 //Get Order Summary Items
 function getSummaryItems() {
@@ -56,95 +117,28 @@ function getSummaryItems() {
 }
 
 
-
-
-
-//Display Menu Items 
-
-function renderMenuItems() {
-    const menuContainer = document.querySelector('.menu-items');
-    menuContainer.innerHTML = getMenuItems();
-
-    //const summaryContainer = document.querySelector('.menu-items__order-summary');
-    //summaryContainer.innerHTML = getMenuItems();
-}
-
-renderMenuItems();
-
-
-
-
 // Display Order Summary Items
 function rednerOrderSummaryItems() {
     const orderSummaryItemsContainer = document.querySelector('.menu-items__order-summary--item-row');
-    orderSummaryItemsContainer,innerHTML = getSummaryItems();
-}
-
-getSummaryItems();
-
-
-
-
-//Display Summary Items
-/*
-function getOrderSummary() {
-    let orderSummaryDisplay = 
-}
-*/
-
-
-const orderTotal = [];
-
-//need to put data attributes on btns to access the specific btns
-//put click event on btn itself
-document.addEventListener('click', function(e){
-  //we need to pass t/ btns data att. somewhere
-  //const matchedItem = getMatchingItem(e.target.dataset.foodItem);
-
-  if (e.target.dataset.foodItem) {
-    getMatchingItem(e.target.dataset.foodItem);
-
-    const foodId = e.target.dataset.foodItem
-    const clickedFoodItem = getMatchingItem(foodId);
-
-    orderTotal.push(clickedFoodItem);
-
-    //console.log(orderTotal)
-    //do something with this info 
-  }
-
-})
-
-
-//On click push cliked items into an empty array
-//then render those items 
-
-
-
-
-
-//Get matching id of the the food item
-//Returns matching objeect id from food item
-function getMatchingItem(foodId) {
-    
-    const foodIdNumber = parseInt(foodId, 10)
-    //filter function
-    const trgtFoodItem = menuArray.filter(function(item){
-        return item.id === foodIdNumber
-    })
-    return trgtFoodItem;
+    orderSummaryItemsContainer.innerHTML = getSummaryItems();
 
 }
 
+rednerOrderSummaryItems()
 
 
+//Calculating Order Total
+const totalPrice = orderTotal.reduce((sum, item) => {
+    return sum + item.price
+
+}, 0);
 
 
 /* 
 When user clicks on item, display summary totatl.
 
 if(user clicks once display check out)
-*/
+
 
 
 //have matching food if pass into another function that display the order total
@@ -160,6 +154,8 @@ function showOrderTotal() {
 
 }
 
+
+*/
 
 
 
