@@ -36,67 +36,6 @@ function  getMenuItems() {
 }
 
 
-//Display Menu Items 
-
-function renderMenuItems() {
-    const menuContainer = document.querySelector('.menu-items');
-    menuContainer.innerHTML = getMenuItems();
-
-    //const summaryContainer = document.querySelector('.menu-items__order-summary');
-    //summaryContainer.innerHTML = getMenuItems();
-}
-
-renderMenuItems();
-
-
-
-
-
-
-
-const orderTotal = [];
-
-document.addEventListener('click', function(e){
-  //const matchedItem = getMatchingItem(e.target.dataset.foodItem);
-
-  if (e.target.dataset.foodItem) {
-    getMatchingItem(e.target.dataset.foodItem);
-
-    const foodId = e.target.dataset.foodItem
-    const clickedFoodItem = getMatchingItem(foodId);
-
-    orderTotal.push(clickedFoodItem);
-
-    rednerOrderSummaryItems()
-    
-    const orderSummaryPrice = document.querySelector('.menu-items__order-summary--item-row__price');
-    orderSummaryPrice.innerHTML = `
-    <span>${totalPrice}</span>
-    `
-  }
-
-})
-
-
-
-
-
-
-
-//Get matching id of the the food item
-//Returns matching objeect id from food item
-function getMatchingItem(foodId) {
-    
-    const foodIdNumber = parseInt(foodId, 10)
-    //filter function
-    const trgtFoodItem = menuArray.find(function(item){
-        return item.id === foodIdNumber
-    })
-    return trgtFoodItem;
-
-}
-
-
 
 //Get Order Summary Items ? Might change this comment
 function getSummaryItems() {
@@ -116,11 +55,11 @@ function getSummaryItems() {
 }
 
 
-<<<<<<< HEAD
 
 
 
 //Display Menu Items 
+
 function renderMenuItems() {
     const menuContainer = document.querySelector('.menu-items');
     menuContainer.innerHTML = getMenuItems();
@@ -185,30 +124,18 @@ function getMatchingItem(foodId) {
         return item.id === foodIdNumber
     })
     return trgtFoodItem;
-=======
-// Display Order Summary Items
-function rednerOrderSummaryItems() {
-    const orderSummaryItemsContainer = document.querySelector('.menu-items__order-summary--item-row');
-    orderSummaryItemsContainer.innerHTML = getSummaryItems();
->>>>>>> 0ccfd45d503b91b0e6459de4a5bc8129055d0da7
 
 }
 
-rednerOrderSummaryItems()
 
 
-//Calculating Order Total
-const totalPrice = orderTotal.reduce((sum, item) => {
-    return sum + item.price
-
-}, 0);
 
 
 /* 
 When user clicks on item, display summary totatl.
 
 if(user clicks once display check out)
-
+*/
 
 
 //have matching food if pass into another function that display the order total
@@ -225,8 +152,6 @@ function showOrderTotal() {
 }
 
 
-*/
-
 
 // Display Order Summary Items
 function rednerOrderSummaryItems() {
@@ -235,6 +160,4 @@ function rednerOrderSummaryItems() {
 
 }
 
-rednerOrderSummaryItems()
-
-
+getSummaryItems();
