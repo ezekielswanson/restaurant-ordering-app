@@ -39,6 +39,7 @@ function  getMenuItems() {
 
 //Get Order Summary Items ? Might change this comment
 function getSummaryItems() {
+//declare as var -> why you were getting undefined probably 
 
     orderTotal.map((order) => {
         return `
