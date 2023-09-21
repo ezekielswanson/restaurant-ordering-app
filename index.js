@@ -37,25 +37,6 @@ function  getMenuItems() {
 
 
 
-//Get Order Summary Items ? Might change this comment
-
-
-function getSummaryItems() {
-    const summaryOrder = orderTotal.map((order) => {
-        return `
-        <div class="menu-items__order-summary--item-row__name">
-            <p>${order.name}</p>
-            <button>Remove</button>
-        </div>
-        <div class="menu-items__order-summary--item-row__price">${order.price}</div>
-        `;
-    }).join('');
-
-    return summaryOrder;
-}
-
-
-
 
 //Display Menu Items 
 
@@ -103,8 +84,7 @@ document.addEventListener('click', function(e){
 
 
 
-//Get matching id of the the food item
-//Returns matching objeect id from food item
+//Gets matching id of the the food item
 function getMatchingItem(foodId) {
     
     const foodIdNumber = parseInt(foodId, 10)
@@ -112,8 +92,31 @@ function getMatchingItem(foodId) {
     const trgtFoodItem = menuArray.filter(function(item){
         return item.id === foodIdNumber
     })
-    return trgtFoodItem;
+    //Returning first item in the array -> Object
+    return trgtFoodItem[0]
 
+}
+
+
+
+
+
+
+//Get Order Summary Items ? Might change this comment
+
+
+function getSummaryItems() {
+    const summaryOrder = orderTotal.map((order) => {
+        return `
+        <div class="menu-items__order-summary--item-row__name">
+            <p>${order.name}</p>
+            <button>Remove</button>
+            <div class="menu-items__order-summary--item-row__price">${order.price}</div>
+        </div>
+        `;
+    }).join('');
+
+    return summaryOrder;
 }
 
 
@@ -125,6 +128,12 @@ When user clicks on item, display summary totatl.
 
 if(user clicks once display check out)
 */
+
+
+
+
+
+
 
 
 //have matching food if pass into another function that display the order total

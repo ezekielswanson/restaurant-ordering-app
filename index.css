@@ -134,6 +134,10 @@ main {
 }
 
 
+.menu-items__order-summary .menu-items__order-summary--item-rows__wrapper .menu-items__order-summary--item-row {
+    display: flex;
+    flex-direction: column;
+}
 
 .menu-items__order-summary .menu-items__order-summary--item-row {
     display: flex;
