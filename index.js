@@ -38,23 +38,21 @@ function  getMenuItems() {
 
 
 //Get Order Summary Items ? Might change this comment
-function getSummaryItems() {
-//declare as var -> why you were getting undefined probably 
 
-    orderTotal.map((order) => {
+
+function getSummaryItems() {
+    const summaryOrder = orderTotal.map((order) => {
         return `
         <div class="menu-items__order-summary--item-row__name">
             <p>${order.name}</p>
             <button>Remove</button>
         </div>
         <div class="menu-items__order-summary--item-row__price">${order.price}</div>
-        `
+        `;
+    }).join('');
 
-    }).join('')
-
-
+    return summaryOrder;
 }
-
 
 
 
@@ -76,17 +74,6 @@ renderMenuItems();
 
 
 
-
-
-
-//Display Summary Items
-/*
-function getOrderSummary() {
-    let orderSummaryDisplay = 
-}
-*/
-
-
 const orderTotal = [];
 
 
@@ -105,11 +92,12 @@ document.addEventListener('click', function(e){
     //do something with this info 
   }
 
+  rednerOrderSummaryItems()
+
 })
 
 
-//On click push cliked items into an empty array
-//then render those items 
+
 
 
 
@@ -148,6 +136,8 @@ function showOrderTotal() {
     foodItemEl.addEventListener('click', function(){
         //display order total
         //seperate order total data in another function
+        
+
     })
 
 }
@@ -158,7 +148,9 @@ function showOrderTotal() {
 function rednerOrderSummaryItems() {
     const orderSummaryItemsContainer = document.querySelector('.menu-items__order-summary--item-row');
     orderSummaryItemsContainer.innerHTML = getSummaryItems();
+    console.log(getSummaryItems());
 
 }
 
-getSummaryItems();
+
+
