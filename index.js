@@ -67,18 +67,16 @@ document.addEventListener('click', function(e){
     const foodId = e.target.dataset.foodItem
     const clickedFoodItem = getMatchingItem(foodId);
 
+    console.log(clickedFoodItem)
+
     orderTotal.push(clickedFoodItem);
 
-    console.log(orderTotal)
-    //do something with this info 
+
   }
 
   rednerOrderSummaryItems()
 
 })
-
-
-
 
 
 
@@ -104,14 +102,15 @@ function getMatchingItem(foodId) {
 
 //Get Order Summary Items ? Might change this comment
 
-
 function getSummaryItems() {
     const summaryOrder = orderTotal.map((order) => {
         return `
-        <div class="menu-items__order-summary--item-row__name">
-            <p>${order.name}</p>
-            <button>Remove</button>
-            <div class="menu-items__order-summary--item-row__price">${order.price}</div>
+        <div class="menu-items__order-summary--item-row">
+            <div class="menu-items__order-summary--item-row__name">
+                <p>${order.name}</p>
+                <button>Remove</button>
+            </div>
+            <div class="menu-items__order-summary--item-row__price">$${order.price}</div>
         </div>
         `;
     }).join('');
@@ -123,43 +122,29 @@ function getSummaryItems() {
 
 
 
-/* 
-When user clicks on item, display summary totatl.
-
-if(user clicks once display check out)
-*/
 
 
+//Display Order Summary Items
+function rednerOrderSummaryItems() {
+    //const orderSummaryItemsContainer = document.querySelector('.menu-items__order-summary--item-row');
+    const orderSummaryItemsContainer = document.querySelector('.menu-items__order-summary--item-rows__wrapper');
+    orderSummaryItemsContainer.innerHTML = getSummaryItems();
+
+}
 
 
 
 
-
-
-//have matching food if pass into another function that display the order total
-function showOrderTotal() {
-    //get div el
-    const foodItemEl = document.querySelector('.menu-items__row-right__circle');
+//Remove Order
+function removeOrder(e) {
+    const removeBtn = document.querySelector('.menu-items__order-summary--item-row__name button');
     
-    // click event
-    foodItemEl.addEventListener('click', function(){
-        //display order total
-        //seperate order total data in another function
+    removeBtn.addEventListener('click', function(e){
+      orderTotal.pop(e.target.dataset.foodItem)
         
 
     })
 
 }
 
-
-
-// Display Order Summary Items
-function rednerOrderSummaryItems() {
-    const orderSummaryItemsContainer = document.querySelector('.menu-items__order-summary--item-row');
-    orderSummaryItemsContainer.innerHTML = getSummaryItems();
-    console.log(getSummaryItems());
-
-}
-
-
-
+removeOrder(e.target.dataset.foodItem)
