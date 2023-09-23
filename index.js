@@ -58,8 +58,11 @@ renderMenuItems();
 const orderTotal = [];
 
 
+
+
+
+//Handling menu items clicked
 document.addEventListener('click', function(e){
-  //const matchedItem = getMatchingItem(e.target.dataset.foodItem);
 
   if (e.target.dataset.foodItem) {
     getMatchingItem(e.target.dataset.foodItem);
@@ -82,7 +85,7 @@ document.addEventListener('click', function(e){
 
 
 
-//Gets matching id of the the food item
+//Gets matching id of the the food item clicked
 function getMatchingItem(foodId) {
     
     const foodIdNumber = parseInt(foodId, 10)
@@ -100,8 +103,7 @@ function getMatchingItem(foodId) {
 
 
 
-//Get Order Summary Items ? Might change this comment
-
+//Setting up Order Summary Items html
 function getSummaryItems() {
     const summaryOrder = orderTotal.map((order) => {
         return `
@@ -120,31 +122,75 @@ function getSummaryItems() {
 
 
 
-
-
-
-
 //Display Order Summary Items
 function rednerOrderSummaryItems() {
-    //const orderSummaryItemsContainer = document.querySelector('.menu-items__order-summary--item-row');
     const orderSummaryItemsContainer = document.querySelector('.menu-items__order-summary--item-rows__wrapper');
     orderSummaryItemsContainer.innerHTML = getSummaryItems();
 
 }
 
 
-
-
-//Remove Order
-function removeOrder(e) {
-    const removeBtn = document.querySelector('.menu-items__order-summary--item-row__name button');
-    
-    removeBtn.addEventListener('click', function(e){
-      orderTotal.pop(e.target.dataset.foodItem)
-        
-
-    })
+//Gets the order total
+function getOrderTotal(orderTotal) {
+    orderTotal = 
 
 }
 
-removeOrder(e.target.dataset.foodItem)
+
+//Display Summary Total
+
+
+
+
+//Removes item from OrderTotal Array
+function removeOrder() {
+    const removeBtns = document.querySelectorAll('.menu-items__order-summary .menu-items__order-summary--item-row .menu-items__order-summary--item-row__name button');
+    
+    removeBtns.forEach(btn => {
+        btn.addEventListener('click', function(e){
+            console.log("Number of remove buttons found:", removeBtns.length);
+
+            console.log("Remove button clicked!");
+
+            const foodId = e.target.dataset.foodItem;
+            const foodIdNumber = parseInt(foodId, 10);
+
+            //Filter out the item with the matching ID
+            orderTotal = orderTotal.filter(order => {
+                return order.id !== foodIdNumber;
+            });
+
+            //Update the order summary display
+            //Removes item b/c filtering out object from orderTotal Array
+            rednerOrderSummaryItems();
+
+      
+        });
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    removeOrder();
+ });
+
+
+
+
+
+/*
+    Remove order from orderTotal array on click
+    removeBtn.addEventListener('click', function(e){
+        const foodId = e.target.dataset.foodItem;
+        const foodIdNumber = parseInt(foodId, 10);
+
+        orderTotal = orderTotal.filter(order => {
+            return order.id === foodIdNumber;
+        });
+
+        //Returning first item in the array -> Object
+        return filteredOrderItem[0];
+    });
+}
+
+*/
+
