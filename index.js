@@ -55,15 +55,18 @@ renderMenuItems();
 
 
 
-const orderTotal = [];
+let orderTotal = [];
 
 
 
 
 
 //Handling menu items clicked
+//Add event listner to btns 
 document.addEventListener('click', function(e){
 
+//Use for dataFoodItem
+//document.querySelectorAll('[data-remove-button]')
   if (e.target.dataset.foodItem) {
     getMatchingItem(e.target.dataset.foodItem);
 
@@ -129,13 +132,14 @@ function rednerOrderSummaryItems() {
 
 }
 
-
+/*
 //Gets the order total
 function getOrderTotal(orderTotal) {
     orderTotal = 
 
 }
 
+*/
 
 //Display Summary Total
 
@@ -144,18 +148,19 @@ function getOrderTotal(orderTotal) {
 
 //Removes item from OrderTotal Array
 function removeOrder() {
+
+    //querySelectorAll("[data-remove-button]")
+    //put that data att. in the html code as well
     const removeBtns = document.querySelectorAll('.menu-items__order-summary .menu-items__order-summary--item-row .menu-items__order-summary--item-row__name button');
-    
+    console.log(removeBtns)
     removeBtns.forEach(btn => {
         btn.addEventListener('click', function(e){
-            console.log("Number of remove buttons found:", removeBtns.length);
-
-            console.log("Remove button clicked!");
 
             const foodId = e.target.dataset.foodItem;
             const foodIdNumber = parseInt(foodId, 10);
 
             //Filter out the item with the matching ID
+            // const filterOrderItem
             orderTotal = orderTotal.filter(order => {
                 return order.id !== foodIdNumber;
             });
