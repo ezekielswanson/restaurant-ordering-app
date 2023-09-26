@@ -80,7 +80,8 @@ document.addEventListener('click', function(e){
 
   }
 
-  rednerOrderSummaryItems()
+  renderOrderSummaryItems();
+  renderOrderTotalPrice();
 
 })
 
@@ -113,7 +114,7 @@ function getSummaryItems() {
         <div class="menu-items__order-summary--item-row">
             <div class="menu-items__order-summary--item-row__name">
                 <p>${order.name}</p>
-                <button>Remove</button>
+                <button class="remove-btn">Remove</button>
             </div>
             <div class="menu-items__order-summary--item-row__price">$${order.price}</div>
         </div>
@@ -126,22 +127,39 @@ function getSummaryItems() {
 
 
 //Display Order Summary Items
-function rednerOrderSummaryItems() {
+function renderOrderSummaryItems() {
     const orderSummaryItemsContainer = document.querySelector('.menu-items__order-summary--item-rows__wrapper');
     orderSummaryItemsContainer.innerHTML = getSummaryItems();
 
 }
 
-/*
-//Gets the order total
-function getOrderTotal(orderTotal) {
-    orderTotal = 
+
+
+
+//Gets the order total price
+function getOrderTotal() {
+    const totalPrice = orderTotal.reduce((totalPrice, currentItem) => {
+        return totalPrice + currentItem.price
+    }, 0)
+
+
+    console.log(totalPrice)
 
 }
 
-*/
 
-//Display Summary Total
+
+
+//Display Total Price
+function renderOrderTotalPrice() {
+    const orderTotalPriceContainer = document.querySelector('.menu-items__order-summary--item-row__price.total');
+    orderTotalPriceContainer.innerHTML = getOrderTotal();
+    
+}
+
+
+
+
 
 
 
@@ -151,7 +169,7 @@ function removeOrder() {
 
     //querySelectorAll("[data-remove-button]")
     //put that data att. in the html code as well
-    const removeBtns = document.querySelectorAll('.menu-items__order-summary .menu-items__order-summary--item-row .menu-items__order-summary--item-row__name button');
+    const removeBtns = document.querySelectorAll('.remove-btn');
     console.log(removeBtns)
     removeBtns.forEach(btn => {
         btn.addEventListener('click', function(e){
