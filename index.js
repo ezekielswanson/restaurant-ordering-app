@@ -82,6 +82,7 @@ document.addEventListener('click', function(e){
 
   renderOrderSummaryItems();
   renderOrderTotalPrice();
+  removeOrder();
 
 })
 
@@ -126,12 +127,14 @@ function getSummaryItems() {
 
 
 
+
 //Display Order Summary Items
 function renderOrderSummaryItems() {
     const orderSummaryItemsContainer = document.querySelector('.menu-items__order-summary--item-rows__wrapper');
-    orderSummaryItemsContainer.innerHTML = getSummaryItems();
+    orderSummaryItemsContainer.innerHTML =  getSummaryItems();
 
 }
+
 
 
 
@@ -142,10 +145,14 @@ function getOrderTotal() {
         return totalPrice + currentItem.price
     }, 0)
 
-
-    console.log(totalPrice)
+    
+    return totalPrice;
+    
 
 }
+
+
+
 
 
 
@@ -153,9 +160,12 @@ function getOrderTotal() {
 //Display Total Price
 function renderOrderTotalPrice() {
     const orderTotalPriceContainer = document.querySelector('.menu-items__order-summary--item-row__price.total');
-    orderTotalPriceContainer.innerHTML = getOrderTotal();
+    let orderTotalNum =  getOrderTotal();
+    orderTotalPriceContainer.innerHTML = `$${orderTotalNum}`
+    
     
 }
+
 
 
 
@@ -170,12 +180,13 @@ function removeOrder() {
     //querySelectorAll("[data-remove-button]")
     //put that data att. in the html code as well
     const removeBtns = document.querySelectorAll('.remove-btn');
-    console.log(removeBtns)
+
     removeBtns.forEach(btn => {
         btn.addEventListener('click', function(e){
 
             const foodId = e.target.dataset.foodItem;
             const foodIdNumber = parseInt(foodId, 10);
+            console.log(foodId)
 
             //Filter out the item with the matching ID
             // const filterOrderItem
@@ -185,8 +196,7 @@ function removeOrder() {
 
             //Update the order summary display
             //Removes item b/c filtering out object from orderTotal Array
-            rednerOrderSummaryItems();
-
+            renderOrderSummaryItems();
       
         });
     });
