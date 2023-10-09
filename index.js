@@ -155,8 +155,6 @@ function getOrderTotal() {
 
 
 
-
-
 //Display Total Price
 function renderOrderTotalPrice() {
     const orderTotalPriceContainer = document.querySelector('.menu-items__order-summary--item-row__price.total');
@@ -165,9 +163,6 @@ function renderOrderTotalPrice() {
     
     
 }
-
-
-
 
 
 
@@ -202,10 +197,12 @@ function removeOrder() {
     });
 }
 
+/*
+
 document.addEventListener("DOMContentLoaded", function() {
     removeOrder();
  });
-
+*/
 
 
 
