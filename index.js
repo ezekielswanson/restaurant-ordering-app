@@ -1,5 +1,6 @@
-
 import { menuArray } from './data.js'
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+
 
 
 
@@ -26,8 +27,6 @@ function  getMenuItems() {
             </div>
             `
 
-        //Have to loop through again set new var and +=
-        //Logic to check if user added to order
 
 
     })
@@ -58,7 +57,22 @@ renderMenuItems();
 let orderTotal = [];
 
 
-
+/*
+document.addEventListener('click', function(e) {
+    if (e.target.dataset.foodItem) {
+        const foodId = e.target.dataset.foodItem;
+        const clickedFoodItem = getMatchingItem(foodId);
+        orderTotal.push(clickedFoodItem);
+        renderOrderSummaryItems();
+        renderOrderTotalPrice();
+    } else if (e.target.classList.contains('remove-btn')) {
+        const itemIndex = parseInt(e.target.dataset.index, 10);
+        orderTotal.splice(itemIndex, 1); // Remove the item using its index
+        renderOrderSummaryItems();
+        renderOrderTotalPrice();
+    }
+});
+*/
 
 
 //Handling menu items clicked
@@ -90,6 +104,7 @@ document.addEventListener('click', function(e){
 
 
 
+
 //Gets matching id of the the food item clicked
 function getMatchingItem(foodId) {
     
@@ -110,12 +125,12 @@ function getMatchingItem(foodId) {
 
 //Setting up Order Summary Items html
 function getSummaryItems() {
-    const summaryOrder = orderTotal.map((order) => {
+    const summaryOrder = orderTotal.map((order, index) => {
         return `
         <div class="menu-items__order-summary--item-row">
             <div class="menu-items__order-summary--item-row__name">
                 <p>${order.name}</p>
-                <button class="remove-btn">Remove</button>
+                <button class="remove-btn" data-food-item="${order.id}">Remove</button>
             </div>
             <div class="menu-items__order-summary--item-row__price">$${order.price}</div>
         </div>
@@ -139,7 +154,7 @@ function renderOrderSummaryItems() {
 
 
 
-//Gets the order total price
+//Calculating order total price
 function getOrderTotal() {
     const totalPrice = orderTotal.reduce((totalPrice, currentItem) => {
         return totalPrice + currentItem.price
@@ -160,6 +175,8 @@ function renderOrderTotalPrice() {
     const orderTotalPriceContainer = document.querySelector('.menu-items__order-summary--item-row__price.total');
     let orderTotalNum =  getOrderTotal();
     orderTotalPriceContainer.innerHTML = `$${orderTotalNum}`
+
+    removeOrder()
     
     
 }
@@ -167,60 +184,32 @@ function renderOrderTotalPrice() {
 
 
 
-
-
-//Removes item from OrderTotal Array
 function removeOrder() {
+    document.addEventListener('click', function(e) {
+        // Check if the clicked element or one of its ancestors has the class '.remove-btn'
+        let targetElement = e.target;
+        while (targetElement !== null && !targetElement.classList.contains('remove-btn')) {
+            targetElement = targetElement.parentElement;
+        }
 
-    //querySelectorAll("[data-remove-button]")
-    //put that data att. in the html code as well
-    const removeBtns = document.querySelectorAll('.remove-btn');
+        // If targetElement is null, then we didn't find a matching element with '.remove-btn'
+        if (targetElement === null) return;
 
-    removeBtns.forEach(btn => {
-        btn.addEventListener('click', function(e){
-
-            const foodId = e.target.dataset.foodItem;
-            const foodIdNumber = parseInt(foodId, 10);
-            console.log(foodId)
-
-            //Filter out the item with the matching ID
-            // const filterOrderItem
-            orderTotal = orderTotal.filter(order => {
-                return order.id !== foodIdNumber;
-            });
-
-            //Update the order summary display
-            //Removes item b/c filtering out object from orderTotal Array
-            renderOrderSummaryItems();
-      
-        });
-    });
-}
-
-/*
-
-document.addEventListener("DOMContentLoaded", function() {
-    removeOrder();
- });
-*/
-
-
-
-
-/*
-    Remove order from orderTotal array on click
-    removeBtn.addEventListener('click', function(e){
-        const foodId = e.target.dataset.foodItem;
+        const foodId = targetElement.dataset.foodItem;
         const foodIdNumber = parseInt(foodId, 10);
 
+        // Filter out the item with the matching ID
         orderTotal = orderTotal.filter(order => {
-            return order.id === foodIdNumber;
+            return order.id !== foodIdNumber;
         });
 
-        //Returning first item in the array -> Object
-        return filteredOrderItem[0];
+        // Update the order summary display
+        renderOrderSummaryItems();
+
+        //Update order summary calculation
+        getOrderTotal()
+
     });
 }
 
-*/
 
