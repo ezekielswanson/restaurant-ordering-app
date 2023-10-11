@@ -57,48 +57,37 @@ renderMenuItems();
 let orderTotal = [];
 
 
-/*
-document.addEventListener('click', function(e) {
-    if (e.target.dataset.foodItem) {
+//Handling menu items clicked
+document.querySelector('.menu-items').addEventListener('click', function(e) {
+    if (e.target && e.target.matches('[data-food-item]')) {
         const foodId = e.target.dataset.foodItem;
         const clickedFoodItem = getMatchingItem(foodId);
-        orderTotal.push(clickedFoodItem);
-        renderOrderSummaryItems();
-        renderOrderTotalPrice();
-    } else if (e.target.classList.contains('remove-btn')) {
-        const itemIndex = parseInt(e.target.dataset.index, 10);
-        orderTotal.splice(itemIndex, 1); // Remove the item using its index
+
+
+        //New obj w/ uuid property
+        const newObject = {
+            name: clickedFoodItem.name,
+            price: clickedFoodItem.price,
+            id: clickedFoodItem.id,
+            uuid: uuidv4()
+
+        };
+
+
+        orderTotal.push(newObject);
+
         renderOrderSummaryItems();
         renderOrderTotalPrice();
     }
 });
-*/
 
 
-//Handling menu items clicked
-//Add event listner to btns 
-document.addEventListener('click', function(e){
-
-//Use for dataFoodItem
-//document.querySelectorAll('[data-remove-button]')
-  if (e.target.dataset.foodItem) {
-    getMatchingItem(e.target.dataset.foodItem);
-
-    const foodId = e.target.dataset.foodItem
-    const clickedFoodItem = getMatchingItem(foodId);
-
-    console.log(clickedFoodItem)
-
-    orderTotal.push(clickedFoodItem);
 
 
-  }
 
-  renderOrderSummaryItems();
-  renderOrderTotalPrice();
-  removeOrder();
 
-})
+
+
 
 
 
@@ -125,12 +114,12 @@ function getMatchingItem(foodId) {
 
 //Setting up Order Summary Items html
 function getSummaryItems() {
-    const summaryOrder = orderTotal.map((order, index) => {
+    const summaryOrder = orderTotal.map((order) => {
         return `
         <div class="menu-items__order-summary--item-row">
             <div class="menu-items__order-summary--item-row__name">
                 <p>${order.name}</p>
-                <button class="remove-btn" data-food-item="${order.id}">Remove</button>
+                <button class="remove-btn" data-uuid="${order.uuid}">Remove</button>
             </div>
             <div class="menu-items__order-summary--item-row__price">$${order.price}</div>
         </div>
@@ -185,6 +174,40 @@ function renderOrderTotalPrice() {
 
 
 function removeOrder() {
+
+
+    document.querySelector('.menu-items__order-summary--item-rows__wrapper').addEventListener('click', function(e) {
+        if (e.target && e.target.matches('.remove-btn')) {
+            const uuidToRemove = e.target.dataset.uuid;
+            orderTotal = orderTotal.filter(order => {
+                return order.uuid !== uuidToRemove;
+            });
+
+            //Update the order summary display
+            renderOrderSummaryItems();
+
+            //Update order summary calculation
+            renderOrderTotalPrice();
+        }
+    });
+    
+
+}
+
+removeOrder();
+
+    
+
+
+
+/*
+
+
+
+
+function removeOrder() {
+
+  
     document.addEventListener('click', function(e) {
         // Check if the clicked element or one of its ancestors has the class '.remove-btn'
         let targetElement = e.target;
@@ -195,21 +218,47 @@ function removeOrder() {
         // If targetElement is null, then we didn't find a matching element with '.remove-btn'
         if (targetElement === null) return;
 
+        
         const foodId = targetElement.dataset.foodItem;
         const foodIdNumber = parseInt(foodId, 10);
+        
+    
 
-        // Filter out the item with the matching ID
+        const uuidToRemove = e.target.dataset.uuid;
+
+        //Filter out the item with the matching ID
         orderTotal = orderTotal.filter(order => {
-            return order.id !== foodIdNumber;
+            return order.uuid !== uuidToRemove;
         });
 
-        // Update the order summary display
+        //Update the order summary display
         renderOrderSummaryItems();
 
         //Update order summary calculation
         getOrderTotal()
 
+        
     });
+    
 }
 
 
+
+ document.querySelectorAll('.remove-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const uuidToRemove = e.target.dataset.uuid;
+            
+            orderTotal = orderTotal.filter(order => {
+                return order.uuid !== uuidToRemove;
+            });
+            
+            //Update the order summary display
+            renderOrderSummaryItems();
+
+            //Update order summary calculation
+            getOrderTotal()
+
+        });
+    });
+
+*/
