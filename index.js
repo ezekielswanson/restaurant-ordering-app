@@ -38,13 +38,9 @@ function  getMenuItems() {
 
 
 //Display Menu Items 
-
 function renderMenuItems() {
     const menuContainer = document.querySelector('.menu-items');
     menuContainer.innerHTML = getMenuItems();
-
-    //const summaryContainer = document.querySelector('.menu-items__order-summary');
-    //summaryContainer.innerHTML = getMenuItems();
 }
 
 renderMenuItems();
@@ -80,13 +76,6 @@ document.querySelector('.menu-items').addEventListener('click', function(e) {
         renderOrderTotalPrice();
     }
 });
-
-
-
-
-
-
-
 
 
 
@@ -142,7 +131,6 @@ function renderOrderSummaryItems() {
 
 
 
-
 //Calculating order total price
 function getOrderTotal() {
     const totalPrice = orderTotal.reduce((totalPrice, currentItem) => {
@@ -154,7 +142,6 @@ function getOrderTotal() {
     
 
 }
-
 
 
 
@@ -196,69 +183,29 @@ function removeOrder() {
 
 removeOrder();
 
+
+
+//Handles order submit btn 
+document.querySelector('.menu-items__order-summary--btn').addEventListener('click',function(){
+    const modal = document.querySelector('.payment-modal__container');
+    modal.classList.add('active');
+})
     
 
 
+//Handles order payment functionality
+document.querySelector('.payment-submit-btn').addEventListener('click',function(){
+    event.preventDefault();
 
-/*
+    const paymentSubmitted = document.querySelector('.payment-modal__container');
+    paymentSubmitted.classList.add('submitted')
 
 
+    const thankYouBtn = document.querySelector('.menu-items__order-summary--btn');
+    thankYouBtn.classList.add('active')
 
 
-function removeOrder() {
-
-  
-    document.addEventListener('click', function(e) {
-        // Check if the clicked element or one of its ancestors has the class '.remove-btn'
-        let targetElement = e.target;
-        while (targetElement !== null && !targetElement.classList.contains('remove-btn')) {
-            targetElement = targetElement.parentElement;
-        }
-
-        // If targetElement is null, then we didn't find a matching element with '.remove-btn'
-        if (targetElement === null) return;
-
-        
-        const foodId = targetElement.dataset.foodItem;
-        const foodIdNumber = parseInt(foodId, 10);
-        
+    const nameVal = document.querySelector('#name').value;
+    thankYouBtn.textContent = `Thanks ${nameVal}!, Your order is on the way!`
+})
     
-
-        const uuidToRemove = e.target.dataset.uuid;
-
-        //Filter out the item with the matching ID
-        orderTotal = orderTotal.filter(order => {
-            return order.uuid !== uuidToRemove;
-        });
-
-        //Update the order summary display
-        renderOrderSummaryItems();
-
-        //Update order summary calculation
-        getOrderTotal()
-
-        
-    });
-    
-}
-
-
-
- document.querySelectorAll('.remove-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            const uuidToRemove = e.target.dataset.uuid;
-            
-            orderTotal = orderTotal.filter(order => {
-                return order.uuid !== uuidToRemove;
-            });
-            
-            //Update the order summary display
-            renderOrderSummaryItems();
-
-            //Update order summary calculation
-            getOrderTotal()
-
-        });
-    });
-
-*/

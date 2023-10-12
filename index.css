@@ -2,6 +2,7 @@
 body {
     margin: 0;
     font-family: 'Smythe', cursive;
+    background: #fafafa;
 } 
 
 
@@ -9,14 +10,14 @@ main {
     display: flex;
     justify-content: center;
     background: #fafafa;
-    margin: 40px 0px;
+    margin: 100px 0px;
 }
 
 
 
 .menu-container {
     width: 600px;
-    height: 1161px;
+    height: auto;
     background: #fff;
     position: relative;
 }
@@ -134,6 +135,10 @@ main {
     margin-bottom: 64px;
 }
 
+.menu-items__order-summary .menu-items__order-summary--item-rows__wrapper.active {
+    display: none;
+}
+
 /*
 
 .menu-items__order-summary .menu-items__order-summary--item-rows__wrapper .menu-items__order-summary--item-row {
@@ -148,6 +153,10 @@ main {
     justify-content: space-between;
     align-items: center;
   
+}
+
+.menu-items__order-summary .menu-items__order-summary--item-row.active {
+    display: none;
 }
 
 .menu-items__order-summary .menu-items__order-summary--item-row .menu-items__order-summary--item-row__name {
@@ -222,6 +231,17 @@ button, input[type="submit"], input[type="reset"] {
     line-height: 24px; /* 150% */
 }
 
+.menu-items__order-summary .menu-items__order-summary--btn.active {
+    background: #ECFDF5;
+    color: #065F46;
+    font-family: Smythe;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28.8px;
+    padding: 50px 60px;
+}
+
 
 
 .payment-modal__container {
@@ -231,10 +251,24 @@ button, input[type="submit"], input[type="reset"] {
     transform: translate(-50%, -50%);
     background-color: #fff;
     padding: 47px 25px 30px;
+    width: 524px;
+    height: 542.24px;
+    filter: drop-shadow(5.186544418334961px 5.186544418334961px 255.43731689453125px rgba(0, 0, 0, 0.50));
+    border-radius: 3.89px;
+    display: none;
+}
+
+.payment-modal__container.active {
+    display: block;
+}
+
+.payment-modal__container.submitted {
+    display: none;
 }
 
 
-.payment-modal__container h1 {
+
+.payment-modal__container h4 {
     color: #000;
     font-family: Verdana;
     font-size: 24px;
@@ -246,11 +280,64 @@ button, input[type="submit"], input[type="reset"] {
 .payment-modal__container form input {
     width: 100%;
     margin-bottom: 23px;
+    padding: 17px 26px;
+    color: #757575;
+    font-family: Verdana;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 31.119px; /* 155.596% */
+    border-radius: 3.89px;
+    border: 1.297px solid #757575;
+
 }
 
 
-.payment-modal__container form button {
+/*Removing Default Spinner buttons */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
+
+
+/*Removing Default Spinner buttons */
+
+
+
+
+.payment-modal__container form input::placeholder {
+    color: #757575;
+    font-family: Verdana;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 31.119px; /* 155.596% */
+}
+
+
+
+.payment-modal__container input[type="submit"] {
     margin-top: 23px;
+    background-color: #16DB99;
+    color: #fff;
+    font-family: Verdana;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 31.119px; /* 155.596% */
+    border-radius: 3.89px;
+   
+        
+
 }
 
 
