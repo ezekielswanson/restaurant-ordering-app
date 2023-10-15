@@ -5,34 +5,40 @@ import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 
 
 //Get Menu Items
-function  getMenuItems() {
-    let menuDisplay = '';
-
-    menuArray.forEach(function(item) {
-        menuDisplay += `
-            <div class="menu-items__row"> 
-                <div class="menu-items__row-left">
-                    <span>${item.emoji}</span>
-                    <div class="menu-items__row-left__text">
-                        <h1>${item.name}</h1>
-                        <p>${item.ingredients}</p>
-                        <p>${item.price}</p>
-                    </div>
-                </div>
-                <div class="menu-items__row-right">
-                    <div class="menu-items__row-right__circle" data-food-item="${item.id}">
-                        <i class="fa-solid fa-plus" data-food-item="${item.id}"></i>
-                    </div>
-                </div>
-            </div>
-            `
+function getMenuItems() {
 
 
+    const menuDisplay = menuArray.map((item) => {
+        return `
+          <div class="menu-items__row"> 
+              <div class="menu-items__row-left">
+                  <span>${item.emoji}</span>
+                  <div class="menu-items__row-left__text">
+                      <h1>${item.name}</h1>
+                      <p>${item.ingredients}</p>
+                      <p>${item.price}</p>
+                  </div>
+              </div>
+              <div class="menu-items__row-right">
+                  <div class="menu-items__row-right__circle" data-food-item="${item.id}">
+                      <i class="fa-solid fa-plus" data-food-item="${item.id}"></i>
+                  </div>
+              </div>
+          </div>
+        `;
 
-    })
+     
+      }).join('')
+
 
     return menuDisplay 
+
 }
+
+
+
+
+
 
 
 
@@ -49,7 +55,7 @@ renderMenuItems();
 
 
 
-
+//Array storing all clicked food items
 let orderTotal = [];
 
 
@@ -88,7 +94,7 @@ function getMatchingItem(foodId) {
     
     const foodIdNumber = parseInt(foodId, 10)
     //filter function
-    const trgtFoodItem = menuArray.filter(function(item){
+    const trgtFoodItem = menuArray.filter((item) => {
         return item.id === foodIdNumber
     })
     //Returning first item in the array -> Object
@@ -151,18 +157,14 @@ function renderOrderTotalPrice() {
     const orderTotalPriceContainer = document.querySelector('.menu-items__order-summary--item-row__price.total');
     let orderTotalNum =  getOrderTotal();
     orderTotalPriceContainer.innerHTML = `$${orderTotalNum}`
-
-    removeOrder()
     
     
 }
 
 
 
-
+//Removing order item on click
 function removeOrder() {
-
-
     document.querySelector('.menu-items__order-summary--item-rows__wrapper').addEventListener('click', function(e) {
         if (e.target && e.target.matches('.remove-btn')) {
             const uuidToRemove = e.target.dataset.uuid;
@@ -189,23 +191,25 @@ removeOrder();
 document.querySelector('.menu-items__order-summary--btn').addEventListener('click',function(){
     const modal = document.querySelector('.payment-modal__container');
     modal.classList.add('active');
+
+    //Handles order payment functionality
+        document.querySelector('.payment-submit-btn').addEventListener('click',function(){
+        event.preventDefault();
+
+        const paymentSubmitted = document.querySelector('.payment-modal__container');
+        paymentSubmitted.classList.add('submitted')
+
+
+        const thankYouBtn = document.querySelector('.menu-items__order-summary--btn');
+        thankYouBtn.classList.add('active')
+
+
+        const nameVal = document.querySelector('#name').value;
+        thankYouBtn.textContent = `Thanks ${nameVal}!, Your order is on the way!`
+    })
+    
 })
     
 
 
-//Handles order payment functionality
-document.querySelector('.payment-submit-btn').addEventListener('click',function(){
-    event.preventDefault();
 
-    const paymentSubmitted = document.querySelector('.payment-modal__container');
-    paymentSubmitted.classList.add('submitted')
-
-
-    const thankYouBtn = document.querySelector('.menu-items__order-summary--btn');
-    thankYouBtn.classList.add('active')
-
-
-    const nameVal = document.querySelector('#name').value;
-    thankYouBtn.textContent = `Thanks ${nameVal}!, Your order is on the way!`
-})
-    
